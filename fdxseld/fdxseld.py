@@ -64,11 +64,13 @@ class FDX68SelectorHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             cmd_error = "protect failed."
 
       current_date = subprocess.run(['date'], capture_output=True, text=True)
-      uptime = subprocess.run(['uptime'], capture_output=True, text=True)
+      #uptime = subprocess.run(['uptime'], capture_output=True, text=True)
       system_model = subprocess.run(['cat', '/proc/device-tree/model'], capture_output=True, text=True)
       measure_temp = subprocess.run(['vcgencmd', 'measure_temp'], capture_output=True, text=True)
       measure_clock_arm = subprocess.run(['vcgencmd', 'measure_clock', 'arm'], capture_output=True, text=True)
       measure_clock_core = subprocess.run(['vcgencmd', 'measure_clock', 'core'], capture_output=True, text=True)
+      measure_clock_arm_mhz = float(measure_clock_arm.stdout.split('=')[1]) / 1000000.0
+      measure_clock_core_mhz = float(measure_clock_core.stdout.split('=')[1]) / 1000000.0
 
       fddctl_list = subprocess.run([self.server.fddctl_cmd, '-l'], capture_output=True, text=True)
       info_lines = fddctl_list.stdout.splitlines()
@@ -103,14 +105,16 @@ class FDX68SelectorHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
   </head>
   <body bgcolor='#000055' text='#ffffff' link='#ffff99' alink='#ffff99' vlink='#ffff99'>
     <h1>FDX68 Image Selector Service</h1>
+    <div>
+      <a href='/'>REFRESH PAGE</a>
+    </div>
     <h3>System Information</h3>
     <div>
       Date/Time: {current_date.stdout}<br>
       Model: {system_model.stdout}<br>
-      CPU Clock: {measure_clock_arm.stdout.split('=')[1]}<br>
-      Core Clock: {measure_clock_core.stdout.split('=')[1]}<br>
+      CPU Clock: {measure_clock_arm_mhz:.2f}MHz<br>
+      Core Clock: {measure_clock_core_mhz:.2f}MHz<br>
       SoC Temp: {measure_temp.stdout.split('=')[1]}<br>
-      Uptime: {uptime.stdout}<br>
     </div>
     <h3>Current Drive Status</h3>
     <div>
@@ -122,9 +126,6 @@ class FDX68SelectorHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     </div>
     <div>
       <font color='red'><b>{cmd_error}</b></font>
-    </div>
-    <div>
-      <a href='/'>Refresh</a>
     </div>
     <h3>Image List</h3>
     <div>
