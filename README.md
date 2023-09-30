@@ -20,6 +20,11 @@ GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。�
     sudo apt install git pip
     pip install git+https://github.com/tantanGH/fdxseld.git
 
+  `/home/pi/.local/bin` を実行パスに追加しておきます。
+
+    echo 'export PATH=/home/pi/.local/bin:$PATH' >> ~/.bashrc
+    source ~/.bashrc
+
 ## 使用方法
 
     fdxseld [options]
@@ -32,7 +37,7 @@ GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。�
   実行例：
 
     sudo /home/pi/fdx68/bin/fddemu &
-    fdxseld -p 6860 -c /home/pi/fdx68k/bin/fddctl -i /home/pi/fdx68k/xdf,/home/pi/fdx68k/dump
+    nohup fdxseld -p 6860 -c /home/pi/fdx68k/bin/fddctl -i /home/pi/fdx68k/xdf,/home/pi/fdx68k/dump > log-fdxseld &
 
   注意：あらかじめ`fddemu`をroot権限で動作させておく必要があります。
 
