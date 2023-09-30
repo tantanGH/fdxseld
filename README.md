@@ -6,6 +6,8 @@ FDX68 image file selecter service
 
 GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。ブラウザを使ってイメージのマウントやイジェクトを手軽に行うことができます。
 
+<img src='images/fdxseld.png'/>
+
 ## 注意点
 
 * 本ソフトウェアを使ったことで何か問題が出た場合、ご迷惑になりますのでくれぐれもGIMONS氏に問い合わせを行わないようにしてください。
