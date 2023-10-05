@@ -91,7 +91,7 @@ class FDX68SelectorHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
       image_entries = []
       for image_dir in sorted(self.server.image_dirs):
-        for file_name in sorted(os.listdir(image_dir)):
+        for file_name in sorted(os.listdir(image_dir), key=str.lower):
           file_ext = file_name[-4:].lower()
           if file_ext == ".fdx" or file_ext == ".xdf" or file_ext == ".dim":
             image_entries.append(f"<tr><td>{image_dir}</td><td>{file_name}</td><td><a href='/insert?drive_id={dr0_id}&image_path={image_dir}/{file_name}'>INSERT(DRIVE{dr0_id})</a> <a href='/insert?drive_id={dr1_id}&image_path={image_dir}/{file_name}'>INSERT(DRIVE{dr1_id})</a></td>")
