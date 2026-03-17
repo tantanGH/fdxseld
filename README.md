@@ -20,13 +20,19 @@ GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。�
   本ソフトウェアはPythonで書かれており、pipを使ったパッケージインストールが可能です。
   FDX68のセットアップが完了している状態で、以下のコマンドで導入します。
 
+  2026年3月時点の最新のRaspberry Pi OS(32bit版、no desktop)で確認してあります。
+  (64bit版OSではFDX68のソフトウェア自体がそのままでは動作しません)
+
     sudo apt install git pip
+    cd
+    python -m venv venv
+    source venv/bin/activate
     pip install git+https://github.com/tantanGH/fdxseld.git
 
-  `/home/pi/.local/bin` を実行パスに追加しておきます。
+~~  `/home/pi/.local/bin` を実行パスに追加しておきます。~~
 
-    echo 'export PATH=/home/pi/.local/bin:$PATH' >> ~/.bashrc
-    source ~/.bashrc
+~~    echo 'export PATH=/home/pi/.local/bin:$PATH' >> ~/.bashrc~~
+~~    source ~/.bashrc~~
 
 ## 使用方法
 
@@ -40,6 +46,7 @@ GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。�
   実行例：
 
     sudo /home/pi/fdx68/bin/fddemu &
+    source /home/pi/venv/bin/activate
     nohup fdxseld -p 6860 -c /home/pi/fdx68k/bin/fddctl -i /home/pi/fdx68k/xdf,/home/pi/fdx68k/dump > log-fdxseld &
 
   注意：あらかじめ`fddemu`をroot権限で動作させておく必要があります。
