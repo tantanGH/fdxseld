@@ -29,10 +29,6 @@ GIMONS氏設計開発のFDX68関連ツール`fddctl`のWebラッパーです。�
     source venv/bin/activate
     pip install git+https://github.com/tantanGH/fdxseld.git
 
-~~  `/home/pi/.local/bin` を実行パスに追加しておきます。~~
-
-~~    echo 'export PATH=/home/pi/.local/bin:$PATH' >> ~/.bashrc~~
-~~    source ~/.bashrc~~
 
 ## 使用方法
 
